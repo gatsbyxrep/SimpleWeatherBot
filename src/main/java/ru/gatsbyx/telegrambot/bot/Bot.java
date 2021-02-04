@@ -1,5 +1,6 @@
 package ru.gatsbyx.telegrambot.bot;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -9,21 +10,22 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
 public class Bot extends TelegramLongPollingBot {
-	// Annotations for reading filing credentials from application.yaml
+	
+	@Autowired
+	private MessagePerformer messagePerformer;
+	
+	// Annotations for filing credentials from application.yaml
 	@Value("${bot.name}")
 	private String username;
 	
 	@Value("${bot.token}")
 	private String token;
 	
-	// Performing message recieving
+	// Performing message receiving
 	@Override
 	public void onUpdateReceived(Update update) {
 		try {
-			SendMessage sendMessage = new SendMessage();
-			sendMessage.setChatId(update.getMessage().getChatId().toString());
-			sendMessage.setText("Hi");
-            execute(sendMessage);
+			execute(messagePerformer.perform(update.getMessage()));
             System.out.println("Recieved text:" + update.getMessage().getText());
             
 		} catch (TelegramApiException e) {

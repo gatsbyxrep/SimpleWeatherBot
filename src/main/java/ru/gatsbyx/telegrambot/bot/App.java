@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class App {
 	public static void main(String[] args) {	
+		// Configure later before deploying
 		org.apache.log4j.BasicConfigurator.configure();
 		SpringApplication.run(App.class, args);
 	}
