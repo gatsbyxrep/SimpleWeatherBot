@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.telegram.telegrambots.meta.api.objects.Location;
 
+import ru.gatsbyx.telegrambot.models.WeatherInfo;
+import ru.gatsbyx.telegrambot.models.WeatherInfo.Weather;
+
 @Service
 public class OpenWeatherAPI  {
 

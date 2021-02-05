@@ -8,8 +8,13 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import ru.gatsbyx.telegrambot.dao.UserDAO;
+import ru.gatsbyx.telegrambot.models.User;
+
 @Component
 public class Bot extends TelegramLongPollingBot {
+	@Autowired
+	private UserDAO userDAO;
 	
 	@Autowired
 	private MessagePerformer messagePerformer;
@@ -25,6 +30,10 @@ public class Bot extends TelegramLongPollingBot {
 	@Override
 	public void onUpdateReceived(Update update) {
 		try {
+			long chatId = update.getMessage().getChatId();
+			if(userDAO.getByChatId(chatId).isPresent() == false) {
+				userDAO.add(new User(chatId, "chat"));
+			}
 			execute(messagePerformer.perform(update.getMessage()));
             System.out.println("Recieved text:" + update.getMessage().getText());
             

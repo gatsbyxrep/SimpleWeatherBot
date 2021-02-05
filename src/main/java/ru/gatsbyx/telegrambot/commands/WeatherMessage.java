@@ -3,8 +3,8 @@ package ru.gatsbyx.telegrambot.commands;
 
 import org.telegram.telegrambots.meta.api.objects.Message;
 
+import ru.gatsbyx.telegrambot.models.WeatherInfo;
 import ru.gatsbyx.telegrambot.weatherApi.OpenWeatherAPI;
-import ru.gatsbyx.telegrambot.weatherApi.WeatherInfo;
 
 public class WeatherMessage implements IResponseMessageBuilder {
 

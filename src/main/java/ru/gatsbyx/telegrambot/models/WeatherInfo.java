@@ -1,4 +1,4 @@
-package ru.gatsbyx.telegrambot.weatherApi;
+package ru.gatsbyx.telegrambot.models;
 
 import java.util.ArrayList;
 import java.util.List;
